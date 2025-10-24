@@ -28,6 +28,16 @@
       }
     };
 
+    // --- Ajuste dinâmico para o cabeçalho fixo ---
+    const adjustHeroPadding = () => {
+      const header = document.querySelector('.main-header');
+      const hero = document.querySelector('.hero');
+      if (!header || !hero) return;
+
+      const headerHeight = header.offsetHeight;
+      hero.style.paddingTop = `${headerHeight}px`;
+    };
+
     // --- Botão "Voltar ao Topo" ---
     const initBackToTopButton = () => {
       const backToTopButton = document.getElementById('back-to-top');
@@ -250,5 +260,6 @@
     initSlideDownPanel();
     initWhatsappForm();
     injectSchema();
+    adjustHeroPadding();
   });
 })();

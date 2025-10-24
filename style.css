@@ -57,19 +57,24 @@ body {
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   position: relative;
-  background-image:
-    url('facemepeb.jpg');
-  background-size: cover;
-  background-position: center center;
-  background-attachment: fixed;
 }
 
 body::before {
   content: '';
   position: fixed;
   inset: 0;
-  background: linear-gradient(to top, rgba(2, 2, 2, 0.85) 0%, rgba(2, 2, 2, 0.4) 100%);
-  z-index: -1;
+  z-index: -2; /* Fica atrás de tudo */
+  background-image: url('facemepeb.jpg');
+  background-size: cover;
+  background-position: center center;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1; /* Fica entre a foto e o conteúdo */
+  background: linear-gradient(to top, rgba(2, 2, 2, 0.9) 0%, rgba(2, 2, 2, 0.5) 100%);
 }
 
 body.modal-open { overflow: hidden; }
@@ -208,7 +213,16 @@ img { max-width: 100%; display: block; }
   display: flex;
   align-items: center;
   text-align: center;
+  /* (GARANTA QUE NÃO HÁ 'padding-top' AQUI) */
 }
+
+/* Ajuste para telas maiores (desktop) */
+@media (min-width: 1024px) {
+  .hero {
+    padding-top: 0; /* Remove o padding no desktop para o alinhamento voltar ao centro perfeito */
+  }
+}
+
 .hero h1 
 { font-size: clamp(2.5rem, 6vw, 5rem); 
     margin-bottom: 1.5rem; 
