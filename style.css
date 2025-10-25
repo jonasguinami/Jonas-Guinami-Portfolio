@@ -108,6 +108,13 @@ section {
   padding: clamp(4rem, 10vw, 8rem) 0;
 }
 
+.section-title {
+  text-align: center; /* Centraliza o texto dentro do h2 */
+  max-width: max-content; /* Faz o h2 ter a largura do seu conteúdo */
+  margin-inline: auto; /* Centraliza o bloco do h2 na horizontal */
+  margin-bottom: 1.5rem; /* Adiciona um espaço abaixo do título, como padrão */
+}
+
 h1, h2, h3 {
   font-family: var(--font-heading);
   color: var(--color-heading);
@@ -429,37 +436,65 @@ img {
   margin-bottom: 0.5rem;
 }
 
-/* PROVA SOCIAL */
+/* ============================================= */
+/* ESTILO DA CAIXA NA SEÇÃO SOCIAL PROOF       */
+/* ============================================= */
+
 .social-proof .container {
-  text-align: center;
+  /* Estilo da Caixa */
+  background: rgba(255, 255, 255, 0.03); /* Fundo sutil (opcional, pode remover se preferir transparente) */
+  border: 1px solid rgba(255, 255, 255, 0.15); /* Borda visível */
+  border-radius: 20px; /* Cantos arredondados, igual aos outros cards */
+  padding: 3rem; /* Espaçamento interno */
+  
+  /* Mantém o conteúdo centralizado */
+  text-align: center; 
+  
+  /* Efeitos adicionais (opcional) */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4); /* Sombra para profundidade */
+  backdrop-filter: blur(5px); /* Leve efeito de vidro */
+  
+  /* Garante que a animação reveal ainda funcione */
+  opacity: 0; 
+  transform: translateY(50px);
+  transition: opacity var(--ease-slow), transform var(--ease-slow);
 }
 
+.social-proof .container.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Ajustes finos (já devem existir, mas confirma) */
 .social-proof h3 {
   font-size: clamp(1.5rem, 4vw, 2rem);
   margin-bottom: 0.5rem;
+  text-align: center;
+  max-width: max-content;
+  margin-inline: auto;
 }
 
 .social-proof p {
   margin-bottom: 2rem;
   max-width: 50ch;
   margin-inline: auto;
+  text-align: center; /* Garante centralização do parágrafo */
 }
 
-.badges-wrapper {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
+/* (As regras de .social-proof-buttons e .button-separator continuam as mesmas) */
+
+.social-proof h3 {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  margin-bottom: 0.5rem;
+  text-align: center; /* Centraliza o texto dentro do h3 */
+  max-width: max-content; /* Faz o h3 ter a largura do seu conteúdo */
+  margin-inline: auto; /* Centraliza o bloco do h3 na horizontal */
+}
+
+.social-proof p {
   margin-bottom: 2rem;
-}
-
-.badge-svg {
-  max-width: 100px;
-  transition: transform var(--ease), filter var(--ease);
-}
-
-.badge-svg:hover {
-  transform: scale(1.1);
-  filter: drop-shadow(0 0 15px rgba(255,255,255,0.3));
+  max-width: 50ch;
+  margin-inline: auto;
 }
 
 .social-proof-buttons {
@@ -860,15 +895,139 @@ img {
   color: var(--color-text);
 }
 
+/* ============================================= */
+/* CSS TICKER DE PROJETOS - VERSÃO VIDRO FINAL */
+/* ============================================= */
+.projects-ticker-section {
+  /* Estilo Vidro Principal */
+  background: rgba(255, 255, 255, 0.05); /* Fundo translúcido */
+  border: 1px solid rgba(255, 255, 255, 0.1); /* Borda sutil */
+  backdrop-filter: blur(15px); /* Efeito de vidro fosco */
+  border-radius: 20px; /* Cantos arredondados */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4); /* Sombra para profundidade */
+  
+  /* Layout e Espaçamento */
+  padding: 2.5rem 0; /* Padding interno vertical */
+  margin: clamp(3rem, 7vw, 6rem) auto; /* Espaçamento externo e centraliza */
+  width: 90%; /* Limita a largura para o efeito de card */
+  max-width: 1200px; /* Mantém o limite máximo */
+  overflow: hidden; /* Garante que o conteúdo não vaze */
+  position: relative; /* Para possíveis efeitos futuros */
+}
+
+.projects-ticker-section .section-title {
+  margin-bottom: 2rem;
+  text-align: center;
+  max-width: max-content;
+  margin-inline: auto;
+  color: var(--color-heading); /* Garante cor */
+  text-shadow: 0 1px 3px rgba(0,0,0,0.5); /* Sombra leve */
+}
+
+.ticker-container {
+  width: 100%;
+  overflow: hidden; /* ESSENCIAL */
+  white-space: nowrap; /* ESSENCIAL */
+  user-select: none;
+  cursor: default; /* Cursor padrão, pois não tem mais JS de arrastar */
+}
+
+.ticker-track {
+  display: inline-flex;
+  animation: ticker-loop 60s linear infinite;
+  will-change: transform;
+}
+
+/* Animação Keyframes - NÃO MUDE */
+@keyframes ticker-loop {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.ticker-list {
+  display: flex;
+  white-space: nowrap;
+}
+
+.ticker-list span {
+  display: inline-block;
+  padding: 0 2rem;
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  color: var(--color-heading);
+  opacity: 0.9;
+  letter-spacing: 0.05em;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+  transition: opacity var(--ease), text-shadow var(--ease);
+}
+
+.ticker-list span::before {
+  content: "✦";
+  margin-right: 2rem;
+  opacity: 0.5;
+  color: var(--color-text);
+  font-size: 0.9em;
+}
+
+.ticker-list span:hover {
+  opacity: 1;
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+/* Pausa no Hover (CSS) - Mantido */
+.ticker-container:hover .ticker-track {
+  animation-play-state: paused;
+}
+
+/* Movimento Reduzido (Mantido) */
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track {
+    animation: none;
+  }
+  .ticker-list:last-child {
+    display: none;
+  }
+  .ticker-container {
+     overflow-x: auto;
+     cursor: default;
+     -ms-overflow-style: none;
+     scrollbar-width: none;
+  }
+   .ticker-container::-webkit-scrollbar {
+     display: none;
+  }
+   .ticker-track {
+     white-space: normal;
+     text-align: center;
+     display: block;
+   }
+   .ticker-list span {
+     display: inline-block;
+     margin: 0.5rem 0.8rem;
+     font-size: 1.1rem;
+     text-shadow: none;
+   }
+   .ticker-list span::before {
+     content: "•";
+     margin-right: 0.8rem;
+     opacity: 0.7;
+     font-size: 1em;
+   }
+}
+/* ============================================= */
+/* FIM DO CSS TICKER */
+/* ============================================= */
 
 /* MEDIA QUERIES (AJUSTES RESPONSIVOS) */
 @media (min-width: 768px) {
   .main-nav {
     display: flex;
   }
-  .social-proof-buttons {
-    flex-direction: row;
-  }
+  
 }
 
 @media (min-width: 1024px) {
